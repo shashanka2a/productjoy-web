@@ -389,35 +389,35 @@ const FeaturedWork: React.FC = () => {
           <WorkCard
             title="Kampus"
             category="UF student marketplace ecosystem"
-            imageSrc="/projects/kampus-hero.jpg"
+            imageSrc="/kampus.png"
             imageAlt="Kampus student marketplace hero"
             url="https://www.kampus.fun/"
           />
           <WorkCard
             title="Homevisor"
             category="Proactive homeownership OS"
-            imageSrc="/projects/homevisor-hero.jpg"
+            imageSrc="/homevisor.png"
             imageAlt="Homevisor home management hero"
             url="https://www.homevisor.co/"
           />
           <WorkCard
             title="Layr"
             category="Concept-to-code builder suite"
-            imageSrc="/projects/layr-hero.jpg"
+            imageSrc="/layr.png"
             imageAlt="Layr modern builder suite hero"
             url="https://www.layr.plus/"
           />
           <WorkCard
             title="Threadz"
             category="AI-native apparel creation"
-            imageSrc="/projects/threadz-hero.jpg"
+            imageSrc="/threadz.png"
             imageAlt="Threadz AI apparel hero"
             url="https://www.threadz.studio/"
           />
           <WorkCard
             title="MenuOS"
             category="Operating system for restaurants"
-            imageSrc="/projects/menuos-hero.jpg"
+            imageSrc="/menuos.png"
             imageAlt="MenuOS restaurant OS hero"
             url="https://www.menuos.app/"
           />
