@@ -65,25 +65,23 @@ const useMousePosition = () => {
   return { mousePosition, isHovering };
 };
 
-const useLocalTime = (offsetGMT: number) => {
+const useLocalTime = () => {
   const [time, setTime] = useState("");
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date();
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const newTime = new Date(utc + 3600000 * offsetGMT);
       setTime(
-        newTime.toLocaleTimeString("en-US", {
+        new Date().toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
-          hour12: false
+          hour12: false,
+          timeZone: "America/New_York"
         })
       );
     };
     updateTime();
     const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
-  }, [offsetGMT]);
+  }, []);
   return time;
 };
 
@@ -203,10 +201,15 @@ const Hero: React.FC = () => {
             Based in Gainesville. We take care of the entire process from concept to joy.
           </p>
 
-          <button className="mt-8 md:mt-0 bg-[#1A1A1A] text-[#F5F3EF] pl-6 pr-8 py-4 rounded-full text-sm font-bold tracking-widest transition-all hover:bg-[#FFD700] hover:text-[#1A1A1A] interactive cursor-none flex items-center gap-3">
-            SEE OUR REEL
+          <a
+            href="https://calendly.com/5ha5hank/availability"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 md:mt-0 bg-[#1A1A1A] text-[#F5F3EF] pl-6 pr-8 py-4 rounded-full text-sm font-bold tracking-widest transition-all hover:bg-[#FFD700] hover:text-[#1A1A1A] interactive cursor-none flex items-center gap-3"
+          >
+            BOOK A CALL
             <div className="w-2 h-2 bg-current rounded-full animate-pulse" />
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -298,7 +301,7 @@ const FeaturedWork: React.FC = () => {
               <h2 className="text-5xl md:text-7xl font-bold tracking-tight font-serif">
                 From Idea
                 <br />
-                to Done.
+                to Execution.
               </h2>
             </div>
 
@@ -492,7 +495,7 @@ const Process: React.FC = () => {
 };
 
 const Footer: React.FC = () => {
-  const localTime = useLocalTime(1);
+  const localTime = useLocalTime();
 
   return (
     <footer className="bg-[#F5F3EF] text-[#1A1A1A] pt-40 pb-0 relative overflow-hidden -mt-10 z-50 rounded-t-[3rem]">
