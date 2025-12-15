@@ -146,24 +146,54 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        {/* Stacked Typography */}
-        <div className="flex flex-col items-start leading-[0.85] tracking-tighter text-[#1A1A1A]">
-          <div className="relative group">
-            <h1 className="text-[13vw] md:text-[8rem] font-serif transition-transform duration-500 group-hover:skew-x-2">
-              Curious
-            </h1>
+        {/* Title + Illustration */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:items-end">
+          {/* Stacked Typography */}
+          <div className="flex-1 flex flex-col items-start leading-[0.85] tracking-tighter text-[#1A1A1A]">
+            <div className="relative group">
+              <h1 className="text-[13vw] md:text-[8rem] font-serif transition-transform duration-500 group-hover:skew-x-2">
+                Curious
+              </h1>
+            </div>
+
+            <div className="relative ml-[5vw] md:ml-32 group">
+              <h1 className="text-[13vw] md:text-[8rem] font-serif italic transition-transform duration-500 group-hover:skew-x-[-2deg]">
+                Fullservice
+              </h1>
+            </div>
+
+            <div className="relative group">
+              <h1 className="text-[13vw] md:text-[8rem] font-serif transition-transform duration-500 group-hover:skew-x-2">
+                Product&nbsp;Agency
+              </h1>
+            </div>
           </div>
 
-          <div className="relative ml-[5vw] md:ml-32 group">
-            <h1 className="text-[13vw] md:text-[8rem] font-serif italic transition-transform duration-500 group-hover:skew-x-[-2deg]">
-              Fullservice
-            </h1>
-          </div>
-
-          <div className="relative group">
-            <h1 className="text-[13vw] md:text-[8rem] font-serif transition-transform duration-500 group-hover:skew-x-2">
-              Product&nbsp;Agency
-            </h1>
+          {/* Hero Illustration */}
+          <div className="hidden lg:flex flex-col items-center justify-center flex-none w-[320px] h-[320px] rounded-[2.5rem] bg-[#1A1A1A] text-[#F5F3EF] relative overflow-hidden shadow-2xl animate-float-slow">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/20 via-transparent to-[#9C27B0]/25" />
+            <div className="relative z-10 flex flex-col items-center gap-6">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F5F3EF]/70">
+                  Q1 2026
+                </span>
+              </div>
+              <div className="relative w-32 h-24 rounded-[1.75rem] bg-[#F5F3EF] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-x-4 top-5 h-6 rounded-full bg-[#1A1A1A]/5" />
+                <div className="relative flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-[#1A1A1A]" />
+                  <div className="w-3 h-3 rounded-full bg-[#1A1A1A]" />
+                </div>
+                <div className="absolute bottom-4 inset-x-6 h-1 rounded-full bg-[#1A1A1A]/10 overflow-hidden">
+                  <div className="h-full w-1/2 bg-[#1A1A1A]" />
+                </div>
+              </div>
+              <p className="text-sm text-center text-[#F5F3EF]/70 max-w-[230px] leading-relaxed">
+                From fuzzy problem to joyful product. Strategy, design, and build in one curious
+                studio.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -366,7 +396,7 @@ const Services: React.FC = () => {
                 <span className="w-3 h-3 bg-[#FFD700] rounded-full" />
                 <span className="font-bold uppercase tracking-widest text-xs">Availability</span>
               </div>
-              <p className="text-2xl font-bold">Open for Q1 2025</p>
+              <p className="text-2xl font-bold">Open for Q1 2026</p>
             </div>
           </div>
         </div>
@@ -467,8 +497,10 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#F5F3EF] text-[#1A1A1A] pt-40 pb-0 relative overflow-hidden -mt-10 z-50 rounded-t-[3rem]">
       <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03]">
-        <h1 className="text-[25vw] font-bold leading-none text-center whitespace-nowrap translate-y-[30%] font-serif">
-          PRODUCTJOY
+        <h1 className="text-[22vw] md:text-[18vw] font-bold leading-none text-center font-serif tracking-tight">
+          PRODUCT
+          <br />
+          JOY
         </h1>
       </div>
 
