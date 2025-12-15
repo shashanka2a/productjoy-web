@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { Plus, Globe, Clock, Mail } from "lucide-react";
 
 /* --- UTILS & HOOKS --- */
@@ -134,6 +135,31 @@ const Navigation: React.FC = () => {
 };
 
 const Hero: React.FC = () => {
+  const mascotRef = useRef<HTMLDivElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -20;
+    const rotateY = ((x - centerX) / centerX) * 20;
+
+    if (mascotRef.current) {
+      mascotRef.current.style.animation = "none";
+      mascotRef.current.style.transform = `translateZ(0px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (mascotRef.current) {
+      mascotRef.current.style.animation = "float-rotate 8s ease-in-out infinite";
+      mascotRef.current.style.transform = "";
+    }
+  };
+
   return (
     <section className="relative min-h-[120vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden px-6">
       <div className="container mx-auto relative z-10">
@@ -144,8 +170,8 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        {/* Title + Illustration */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:items-end">
+        {/* Title + 3D Illustration */}
+        <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
           {/* Stacked Typography */}
           <div className="flex-1 flex flex-col items-start leading-[0.85] tracking-tighter text-[#1A1A1A]">
             <div className="relative group">
@@ -167,30 +193,55 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Hero Illustration */}
-          <div className="hidden lg:flex flex-col items-center justify-center flex-none w-[320px] h-[320px] rounded-[2.5rem] bg-[#1A1A1A] text-[#F5F3EF] relative overflow-hidden shadow-2xl animate-float-slow">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/20 via-transparent to-[#9C27B0]/25" />
-            <div className="relative z-10 flex flex-col items-center gap-6">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F5F3EF]/70">
-                  Q1 2026
-                </span>
+          {/* 3D Mascot Illustration */}
+          <div className="hidden lg:flex w-full max-w-md h-[420px] items-center justify-center animate-slide-up">
+            <div
+              className="relative h-full w-full rounded-3xl bg-[#f5f3ef]/60 border border-white/60 shadow-2xl scene overflow-hidden"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              {/* Background speed lines */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+                <div className="absolute top-2/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+                <div className="speed-line top-[20%]" style={{ left: "10%", animationDuration: "3s" }} />
+                <div className="speed-line top-[60%]" style={{ left: "40%", animationDuration: "2.5s" }} />
+                <div className="speed-line top-[80%]" style={{ left: "0%", animationDuration: "4s" }} />
               </div>
-              <div className="relative w-32 h-24 rounded-[1.75rem] bg-[#F5F3EF] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-x-4 top-5 h-6 rounded-full bg-[#1A1A1A]/5" />
-                <div className="relative flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-[#1A1A1A]" />
-                  <div className="w-3 h-3 rounded-full bg-[#1A1A1A]" />
-                </div>
-                <div className="absolute bottom-4 inset-x-6 h-1 rounded-full bg-[#1A1A1A]/10 overflow-hidden">
-                  <div className="h-full w-1/2 bg-[#1A1A1A]" />
+
+              {/* Mascot */}
+              <div className="flex items-center justify-center h-full">
+                <div ref={mascotRef} className="mascot-wrapper">
+                  {/* Depth layers */}
+                  <div className="mascot-layer" style={{ transform: "translateZ(-30px)", background: "#d4d4d4" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(-25px)", background: "#d6d6d6" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(-20px)", background: "#d9d9d9" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(-15px)", background: "#dbdbdb" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(-10px)", background: "#dedede" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(-5px)", background: "#e0e0e0" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(0px)", background: "#e3e3e3" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(5px)", background: "#e6e6e6" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(10px)", background: "#e8e8e8" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(15px)", background: "#ebebeb" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(20px)", background: "#ededed" }} />
+                  <div className="mascot-layer" style={{ transform: "translateZ(25px)", background: "#f0f0f0" }} />
+
+                  <div className="mascot-layer mascot-face flex flex-col items-center justify-center gap-6">
+                    <div className="flex gap-8">
+                      <div className="eye" />
+                      <div className="eye" />
+                    </div>
+                    <div className="loading-mouth">
+                      <div className="loading-bar" />
+                    </div>
+                    <div className="absolute top-[45%] left-4 w-4 h-3 bg-pink-300 rounded-full opacity-30 blur-sm" />
+                    <div className="absolute top-[45%] right-4 w-4 h-3 bg-pink-300 rounded-full opacity-30 blur-sm" />
+                  </div>
                 </div>
               </div>
-              <p className="text-sm text-center text-[#F5F3EF]/70 max-w-[230px] leading-relaxed">
-                From fuzzy problem to joyful product. Strategy, design, and build in one curious
-                studio.
-              </p>
+
+              {/* Shadow */}
+              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-32 h-6 bg-black/10 blur-xl rounded-full animate-pulse" />
             </div>
           </div>
         </div>
@@ -219,21 +270,32 @@ const Hero: React.FC = () => {
 type WorkCardProps = {
   title: string;
   category: string;
+  imageSrc: string;
+  imageAlt: string;
+  url: string;
 };
 
-const WorkCard: React.FC<WorkCardProps> = ({ title, category }) => {
+const WorkCard: React.FC<WorkCardProps> = ({ title, category, imageSrc, imageAlt, url }) => {
   return (
-    <div className="min-w-[80vw] md:min-w-[600px] group relative interactive cursor-none transition-transform duration-500">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="min-w-[80vw] md:min-w-[600px] group relative interactive cursor-none transition-transform duration-500"
+    >
       <div className="aspect-[4/3] rounded-[2rem] overflow-hidden relative bg-[#2A2A2A] group-hover:scale-[0.98] transition-transform duration-500 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 opacity-50" />
-
-        <div className="absolute inset-0 flex items-center justify-center text-[#F5F3EF]/20 font-bold text-9xl select-none font-serif">
-          {title[0]}
-        </div>
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          className="object-cover"
+          sizes="(min-width: 1024px) 600px, 80vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
         <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="text-white bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-bold">
-            Watch Case Study
+          <span className="text-white bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm font-bold">
+            View Live Project
           </span>
         </div>
       </div>
@@ -241,7 +303,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ title, category }) => {
         <h3 className="text-4xl font-bold text-[#F5F3EF] font-serif">{title}</h3>
         <p className="text-[#F5F3EF]/50 mt-2 text-xl">{category}</p>
       </div>
-    </div>
+    </a>
   );
 };
 
@@ -324,11 +386,41 @@ const FeaturedWork: React.FC = () => {
           className="flex gap-32 px-6 md:px-20 mt-32 will-change-transform"
           style={{ transform: `translateX(${getTranslateX()}px)` }}
         >
-          <WorkCard title="FinTech Neo" category="App Design & Motion System" />
-          <WorkCard title="Green Energy" category="Brand Identity" />
-          <WorkCard title="Nordic Stream" category="Web Experience" />
-          <WorkCard title="Health AI" category="Product Strategy" />
-          <WorkCard title="Urban Flow" category="Smart City App" />
+          <WorkCard
+            title="Kampus"
+            category="UF student marketplace ecosystem"
+            imageSrc="/projects/kampus-hero.jpg"
+            imageAlt="Kampus student marketplace hero"
+            url="https://www.kampus.fun/"
+          />
+          <WorkCard
+            title="Homevisor"
+            category="Proactive homeownership OS"
+            imageSrc="/projects/homevisor-hero.jpg"
+            imageAlt="Homevisor home management hero"
+            url="https://www.homevisor.co/"
+          />
+          <WorkCard
+            title="Layr"
+            category="Concept-to-code builder suite"
+            imageSrc="/projects/layr-hero.jpg"
+            imageAlt="Layr modern builder suite hero"
+            url="https://www.layr.plus/"
+          />
+          <WorkCard
+            title="Threadz"
+            category="AI-native apparel creation"
+            imageSrc="/projects/threadz-hero.jpg"
+            imageAlt="Threadz AI apparel hero"
+            url="https://www.threadz.studio/"
+          />
+          <WorkCard
+            title="MenuOS"
+            category="Operating system for restaurants"
+            imageSrc="/projects/menuos-hero.jpg"
+            imageAlt="MenuOS restaurant OS hero"
+            url="https://www.menuos.app/"
+          />
         </div>
       </div>
     </section>
